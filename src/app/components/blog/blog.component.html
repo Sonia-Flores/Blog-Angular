@@ -1,19 +1,58 @@
 <div class="title">
     <h1>
-        Welcome to blog!
+        ¡Crea tu Fake New!
     </h1>
 </div>
 
+<!--Sección de formulario-->
 <section class="formSection">
+    <form [formGroup]="formBlog" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <label for="title">Titulo:</label>
+                <input class="form-control" type="text" name="title" formControlName="title" placeholder="Introduce un título">
+                <div *ngIf=" submited && formBlog.controls.title.errors?.required" class="error">
+                    El titulo es un campo requerido
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="img_url">Imagen:</label>
+                <input class="form-control" type="url" name="img_url" formControlName="img_url" placeholder="Introduce la url de una imagen">
+                <div *ngIf=" submited && formBlog.controls.img_url.errors?.required" class="error">
+                    La url de la imagen es un campo requerido
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="date">Fecha:</label>
+                <input class="form-control" type="date" name="date" formControlName="date">
+                <div *ngIf=" submited && formBlog.controls.date.errors?.required" class="error">
+                    La fecha es un campo requerido
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <label for="body_new">Texto:</label>
+                <textarea class="form-control" type="text" name="body_new" formControlName="body_new" placeholder="Introduce el texto de la noticia"> </textarea>
+                <div *ngIf=" submited && formBlog.controls.body_new.errors?.required" class="error">
+                    El texto es un campo requerido
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Publicar noticia</button>
+    </form>
 </section>
 
+<!--Sección de noticias-->
 <section class="newsSection">
     <div class="d-flex justify-content-center" *ngFor="let new of arrNews">
-        <div class="card mb-3">
+        <div class="card mb-5">
             <div class="card-body">
-                <h5 class="card-title">{{new.title}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{new.date}}</h6>
-                <img class="card-img-top" src="{{new.img_url}}" alt="card image">
+                <h5 class="card-title mb-2">{{new.title}}</h5>
+                <h6 class="card-subtitle mb-3 text-muted">{{new.date | date: 'dd/MM/yyyy'}}</h6>
+                <img class="card-img-top mb-2" src="{{new.img_url}}" alt="card image">
                 <p class="card-text">{{new.body_new}}</p>
             </div>
         </div>
