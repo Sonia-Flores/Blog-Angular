@@ -8,5 +8,14 @@
 </section>
 
 <section class="newsSection">
-
+    <div class="d-flex justify-content-center" *ngFor="let new of arrNews">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{new.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{new.date}}</h6>
+                <img class="card-img-top" src="{{new.img_url}}" alt="card image">
+                <p class="card-text">{{new.body_new}}</p>
+            </div>
+        </div>
+    </div>
 </section>
